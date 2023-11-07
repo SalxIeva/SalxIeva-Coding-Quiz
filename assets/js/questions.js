@@ -24,7 +24,7 @@ var questions = [
         correctAnswer: "1. To style and layout web pages"
     },
     {
-        question: "What are the two types of variables in JavaScript?",
+        question: "What are the types of variables in JavaScript?",
         answers: ["1. Var, For, Const, Let",
         "2. Local variables and global variables",
         "3. Loacl variables and public variables",
