@@ -37,23 +37,22 @@ function displayQuestion() {
 }
 // function to check if the user selected the right answer, if not then deduct 10sec
 function checkAnswer(selectedAnswer, correctAnswer) {
+    // if user pressed correct answer next question will show up and the message at the bottom will display "Corect!!"
     if (selectedAnswer === correctAnswer) {
         winCount++;
         feedback.classList.remove("hide");
         feedback.textContent = "Correct!!";
-        
-        // if user pressed correct answer next question with show up
     } else {
         // if user pressed wrong answer
         // subtract 10 seconds for incorrect answers
-        timeLeft = -10; 
+        // message at the bottom will display "Wrong.."
+        timeLeft -= 10; 
         loseCount--;
-        nextQuestion();
         feedback.classList.remove("hide");
         feedback.textContent = "Wrong.."
     }
-    
-    nextQuestion(); // nextQuestion function is called to move to the next question
+    // nextQuestion function is called to move to the next question
+    nextQuestion(); 
 }
 
 // Function to reset the answer buttons
@@ -80,13 +79,14 @@ function nextQuestion() {
 function startTime() {
     timer = setInterval(function () {
         timeLeft--;
-        timeEl.textContent =  timeLeft + " seconds";
+    timeEl.textContent =  timeLeft + " seconds";
 
         if (timeLeft <= 0) {
-            clearInterval(timer); // Stop the timer
+            // stop the timer and end quiz
+            clearInterval(timer); 
             endQuiz();
         }
-    }, 1000);
+        }, 1000);
 }
 
 var endScreen = document.querySelector("#end-screen"); 
@@ -98,14 +98,12 @@ function startQuiz() {
     if (!quizStart) {
         quizStart = true;
     currentQuesIndex = 0;
-    timeLeft = 200;
+    timeLeft = 80;
     startTime()
     displayQuestion();
     startBtn.classList.add("hide");
     startScreen.classList.add("hide");
     questionEl.classList.remove("hide");
-    // Prevents start button from being clicked when round is in progress
-    // startBtn.disabled = true;
     
     displayQuestion();
     }
