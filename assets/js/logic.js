@@ -122,7 +122,7 @@ submitBtn.addEventListener("click", function (event) {
 });
 
 // End the quiz, store the score, and show the final score
-function endQuiz(userInitials) {
+function endQuiz() {
     endScreen.classList.remove("hide");
     questionEl.classList.add("hide");
     var userInitials = initials.value;
