@@ -3,6 +3,7 @@ var startBtn = document.querySelector("#start");
 var answerEl = document.querySelector("#choices");
 var currentQuesIndex = 0;
 var submitBtn = document.querySelector("#submit");
+var initials = document.querySelector("#initials");
 var feedback = document.querySelector("#feedback");
 var quizStart = false;
 
@@ -13,6 +14,7 @@ var isWin = false;
 var timer;
 var timeLeft;
 var timerCount;
+var totalScore = 0;
 
 // Function to display the current question
 function displayQuestion() {
@@ -47,10 +49,10 @@ function checkAnswer(selectedAnswer, correctAnswer) {
         // subtract 10 seconds for incorrect answers
         // message at the bottom will display "Wrong.."
         timeLeft -= 10; 
-        loseCount--;
         feedback.classList.remove("hide");
         feedback.textContent = "Wrong.."
     }
+    totalScore = winCount + timeLeft;
     // nextQuestion function is called to move to the next question
     nextQuestion(); 
 }
@@ -98,8 +100,11 @@ function startQuiz() {
     if (!quizStart) {
         quizStart = true;
     currentQuesIndex = 0;
-    timeLeft = 80;
+    // initial quiz time is 80 seconds
+    timeLeft = 80; 
+    // startTime function has been called
     startTime()
+    // displayQuestion function is called to display questions and their answers
     displayQuestion();
     startBtn.classList.add("hide");
     startScreen.classList.add("hide");
@@ -108,9 +113,23 @@ function startQuiz() {
     displayQuestion();
     }
 }
-// function to show end screen
+// function to show end screen and submit button
 function endQuiz() {
     endScreen.classList.remove("hide");
     questionEl.classList.add("hide");
+
+    // store the totalScore in localStorage
+    localStorage.setItem("totalScore", totalScore);
+
+    // redirect to the highscore page
+    window.location.href = "highscores.html";
 }
 submitBtn.addEventListener("click", endQuiz);
+
+// function for submit button including user initials
+submitBtn.addEventListener("click", function() {
+    var userInitials = initials.value;
+    initials.value = "";
+    feedback.classList.add("hide");
+    endQuiz();
+})
