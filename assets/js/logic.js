@@ -25,11 +25,14 @@ function displayQuestion() {
     var answerBtns = document.querySelector("#choices");
     answerBtns.innerHTML = '';
     
+
     currentQuestion.answers.forEach(function (answer, i) {
         var answerBtn = document.createElement("button");
         answerBtn.textContent = answer;
         answerBtn.classList.add("button");
         answerBtn.setAttribute("data-correctAnswer", currentQuestion.correctAnswer);
+
+
         
         answerBtn.addEventListener("click", function () {
             checkAnswer(answer, currentQuestion.correctAnswer);
@@ -119,7 +122,7 @@ function endQuiz() {
     questionEl.classList.add("hide");
 
     // store the totalScore in localStorage
-    localStorage.setItem("totalScore", totalScore);
+    localStorage.setItem("totalScore", totalScore.toString());
 
     // redirect to the highscore page
     window.location.href = "highscores.html";
