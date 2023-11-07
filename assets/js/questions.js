@@ -77,25 +77,47 @@ var answerEl = document.querySelector("#choices");
 var currentQuesIndex = 0;
 var timer;
 var timeLeft = 60; // time for every question to answer
+var quizStart = false;
 
 
 // Function to display the current question
 function displayQuestion() {
+ // Implement the logic to display the current question and its answer choices here
+ var currentQuestion = questions[currentQuesIndex];
+ // Example: You can set the text of the question and answer choices using DOM manipulation
+ var questionText = document.querySelector("#question-title");
+ questionText.textContent = currentQuestion.question;
 
+ var asnwerBtns = document.querySelector("#choices");
+ asnwerBtns.innerHTML = '';
+
+ currentQuestion.answers.forEach(function (answer, i) {
+    var answerBtn = document.createElement("button");
+    answerBtn.textContent = answer;
+    answerBtn.addEventListener("click", function () {
+        checkAnswer(answer, currentQuestion.correctAnswer);
+    });
+    asnwerBtns.appendChild(answerBtn);
+ })
 }
+displayQuestion();
+
 
 // Function to start the quiz
-function startQuiz() {
-
-}
-
 // Function to start the timer
 function startTime() {
-
+    
 }
 // Function to check the selected answer
 function checkAnswer(selectedAnswer, correctAnswer) {
-
+    
 }
 // Add an event listener to the start button to begin the quiz
 startBtn.addEventListener("click", startQuiz);
+
+function startQuiz() {
+    startBtn.classList.add("hide");
+    questionEl.classList.remove("hide");
+    currentQuesIndex = 0;
+    displayQuestion();
+}
