@@ -32,8 +32,6 @@ function displayQuestion() {
         answerBtn.classList.add("button");
         answerBtn.setAttribute("data-correctAnswer", currentQuestion.correctAnswer);
 
-
-        
         answerBtn.addEventListener("click", function () {
             checkAnswer(answer, currentQuestion.correctAnswer);
         });
@@ -116,6 +114,18 @@ function startQuiz() {
     displayQuestion();
     }
 }
+
+// function for submit button including user initials
+submitBtn.addEventListener("click", function(event) {
+    // event.preventDefault(); // prevent default from refreshing the page
+    var userInitials = initials.value;
+    initials.value = "";
+    feedback.classList.add("hide");
+    endQuiz();
+    scores();
+})
+// submitBtn.addEventListener("click", endQuiz);
+
 // function to show end screen and submit button
 function endQuiz() {
     endScreen.classList.remove("hide");
@@ -124,15 +134,11 @@ function endQuiz() {
     // store the totalScore in localStorage
     localStorage.setItem("totalScore", totalScore.toString());
 
-    // redirect to the highscore page
-    window.location.href = "highscores.html";
+    var finalScores = document.querySelector("#final-score");
+    finalScores.innerHTML = "Your final score is " + totalScore;
 }
-submitBtn.addEventListener("click", endQuiz);
-
-// function for submit button including user initials
-submitBtn.addEventListener("click", function() {
-    var userInitials = initials.value;
-    initials.value = "";
-    feedback.classList.add("hide");
-    endQuiz();
-})
+    // redirect to the finalscore page
+    function scores() {
+    window.location.href = "highscores.html";
+    }
+  

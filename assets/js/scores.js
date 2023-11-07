@@ -8,3 +8,7 @@ var totalScore = parseInt(localStorage.getItem("totalScore"));
 if (totalScore !== null) {
     document.getElementById("highscores").textContent = "Total Score: " + totalScore;
 }
+
+function goBack() {
+    window.location.href = "index.html";
+} 
