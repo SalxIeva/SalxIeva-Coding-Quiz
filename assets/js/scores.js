@@ -12,3 +12,14 @@ if (!isNaN(totalScore)) {
 function goBack() {
     window.location.href = "index.html";
 } 
+// function to clear high scores
+function clearHighScores() {
+    localStorage.clear(); // Clear all data in localStorage
+    // Clear the highscores list by setting it to an empty string
+    highScores.innerHTML = "";
+  }
+  
+  var clearScoresBtn = document.querySelector("#clear");
+  
+  // Event listener for the "Clear Highscores" button
+  clearScoresBtn.addEventListener("click", clearHighScores);
