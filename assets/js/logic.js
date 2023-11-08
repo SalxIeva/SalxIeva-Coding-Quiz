@@ -118,14 +118,16 @@ submitBtn.addEventListener("click", function (event) {
     initials.value = "";
     feedback.classList.add("hide");
     endQuiz(userInitials);
+    // to store userInitials in local stroage for scores.js accesibility
+    localStorage.setItem("userInitials", userInitials);
     scores();
 });
 
 // End the quiz, store the score, and show the final score
-function endQuiz() {
+function endQuiz(userInitials) {
     endScreen.classList.remove("hide");
     questionEl.classList.add("hide");
-    var userInitials = initials.value;
+    // var userInitials = initials.value;
     localStorage.setItem(userInitials, totalScore.toString());
 
     var finalScores = document.querySelector("#final-score");
