@@ -6,32 +6,51 @@ var highScores = document.querySelector("#highscores");
 
 // Function to add a user's score and initials to the highscores list
 function addHighScore(userInitials, totalScore) {
-  // List item is created to store scores
+  // New list item created to save scores in the ordered #highscores list
   var highScoresLi = document.createElement("li");
   highScoresLi.textContent = userInitials + " - " + totalScore;
 
-  // Append the list item to the highscores list
+  // The list item appended to the highscores list
   highScores.appendChild(highScoresLi);
 }
-
-// When the game ends, it should display their score and give the user the ability to save their initials and their score
-var totalScore = parseInt(localStorage.getItem(totalScore));
+// retrieve scores from localStorage
+var totalScore = parseInt(localStorage.getItem("totalScore"));
+var userInitials = localStorage.getItem("userInitials");
 
 if (!isNaN(totalScore)) {
-    document.getElementById("highscores").textContent = "Total Score: " + totalScore;
+  // Function called to add the user's score to the highscores list
+  addHighScore(userInitials, totalScore);
 }
 
-function goBack() {
-    window.location.href = "index.html";
-} 
-// function to clear high scores
-function clearHighScores() {
-    localStorage.clear(); // Clear all data in localStorage
-    // Clear the highscores list by setting it to an empty string
-    highScores.innerHTML = "";
+// userScores array taken from localStorage
+var userScores = [];
+
+for (var i = 0; i < localStorage.length; i++) {
+  var key = localStorage.key(i);
+  var value = parseInt(localStorage.getItem(key));
+
+  if (!isNaN(value)) {
+    userScores.push({ initials: key, score: value });
   }
-  
-  var clearScoresBtn = document.querySelector("#clear");
-  
-  // Event listener for the "Clear Highscores" button
-  clearScoresBtn.addEventListener("click", clearHighScores);
+}
+// function to return highest score and user initials
+userScores.sort(function (a, b) {
+  return b.score - a.score;
+});
+
+if (userScores.length > 0) {
+  var highestScore = userScores[0];
+  document.querySelector("#highscores").textContent = "Highest Score: " + highestScore.initials + " " + highestScore.score;
+}
+
+// Function to clear high scores
+function clearHighScores() {
+  localStorage.clear(); // Clear all data in localStorage
+  // Clear the highscores list by setting its innerHTML to an empty string
+  highScores.innerHTML = "";
+}
+
+var clearScoresBtn = document.querySelector("#clear");
+
+// Event listener for the "Clear Highscores" button
+clearScoresBtn.addEventListener("click", clearHighScores);
