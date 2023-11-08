@@ -31,3 +31,11 @@ N/A
 ## License
 
 Please refer to the LICENSE in the repo.
+
+## URL
+
+https://salxieva.github.io/SalxIeva-Coding-Quiz/
+
+## Screenshot
+
+![image](https://github.com/SalxIeva/SalxIeva-Coding-Quiz/assets/133906072/52f06340-9aeb-461c-b529-eb83c5d9a2f1)
